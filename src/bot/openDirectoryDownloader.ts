@@ -3,7 +3,7 @@ import execa from "execa";
 import { rm, rmdir, readdir } from "fs/promises";
 import config from "./constants.json"
 
-async function get_open_directory_info(url: string, should_file_size_be_exact?: boolean): Promise<string>
+export default async function get_open_directory_info(url: string, should_file_size_be_exact?: boolean): Promise<string>
 {
   const max_thread = cpus().length == 1 ? 32 : 16; // check for 1 core cuz I want to have a lot of thread on the xeon of my vps ~ Vini
   const open_directory_downloader_args: Array<string> =
