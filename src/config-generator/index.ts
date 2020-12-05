@@ -4,13 +4,15 @@
 import { program } from "commander"
 import { writeFileSync, existsSync, mkdirSync } from "fs";
 
-program.requiredOption("-s, --secret <secret key>", "The reddit secret token");
-program.requiredOption("-a, --acess-token <acess token>", "The reddit acess token");
-program.requiredOption("-n, --username <username>", "The bot username");
+program.requiredOption("-s, --client-secret <client secret>", "The reddit secret token");
+program.requiredOption("-i, --client-id <Client ID>", "The reddit acess token");
+program.requiredOption("-u, --username <username>", "The bot username");
 program.requiredOption("-p, --password <password>", "The bot password");
 
 program.description("Generate the bot configuration file");
 program.version("0.0.1");
+
+program.allowUnknownOption(false)
 
 program.parse()
 
@@ -19,11 +21,11 @@ if (!existsSync("./config/"))
   mkdirSync("./config")
 
 writeFileSync("./config/reddit-bot-config.json", JSON.stringify({
-  secret: program.secret,
-  accessToken: program.acessToken,
+  clientSecret: program.clientSecret,
+  clientId: program.clientId,
   username: program.username,
   password: program.password,
-  useragent: `open-directory-bot (node ${process.version})`
+  userAgent: `open-directory-bot (node ${process.version})`
 }, undefined, 2))
 
 console.log("Wrote config!")
