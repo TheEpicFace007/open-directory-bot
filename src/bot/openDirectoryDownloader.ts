@@ -40,9 +40,9 @@ export default async function get_open_directory_info(url: string, should_file_s
     let prgm_output = out.stdout;
     let md_table: string = "";
     let found: Array<string> = [];
-    md_table += out.stdout.match(regexes[0])[0];
-    md_table += out.stdout.match(regexes[1])[0];
-    md_table += out.stdout.match(regexes[2])[0];
+    md_table += out.stdout.match(regexes[0])[0] + "\n"
+    md_table += out.stdout.match(regexes[1])[0] + "\n"
+    md_table += out.stdout.match(regexes[2])[0] + "\n"
     for (let i = 0; i < 6; i++)
     {
       let matching_result = regexes[3].exec(out.stdout);
@@ -76,7 +76,8 @@ async function clean_open_directory_folder_async(): Promise<void>
     Promise.all([
       rmdir(`${config.OpenDirectoryDownloaderPath}/LogArchives`, { recursive: true }),
       rmdir(`${config.OpenDirectoryDownloaderPath}/Scans`, { recursive: true }),
-      rm(`./${config.OpenDirectoryDownloaderPath}/History.log`, { force: true })
+      rm(`./${config.OpenDirectoryDownloaderPath}/History.log`, { force: true }),
+      rm(`./${config.OpenDirectoryDownloaderPath}/OpenDirectoryDownloader.log`, { force: true })
     ])
       .then(() => resolve())
       .catch();
