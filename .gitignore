@@ -1,0 +1,10 @@
+/dist
+/config
+tsconfig.tsbuildinfo
+package-lock.json
+/node_modules/
+
+OpenDirectoryDownloader/History.log
+OpenDirectoryDownloader/OpenDirectoryDownloader.log
+OpenDirectoryDownloader/Scans
+OpenDirectoryDownloader/LogArchives
