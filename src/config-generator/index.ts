@@ -1,7 +1,7 @@
 /**
  * This file generate configuration for the bot
  */
-import { program } from "commander"
+import { program } from "commander";
 import { writeFileSync, existsSync, mkdirSync } from "fs";
 
 program.requiredOption("-s, --client-secret <client secret>", "The reddit secret token");
@@ -12,13 +12,17 @@ program.requiredOption("-p, --password <password>", "The bot password");
 program.description("Generate the bot configuration file");
 program.version("0.0.1");
 
-program.allowUnknownOption(false)
+program.allowUnknownOption(false);
 
-program.parse()
+program.parse();
 
-console.log("Writting config . . .")
+console.log("Writting config . . .");
 if (!existsSync("./config/"))
-  mkdirSync("./config")
+{
+  console.log("The config folder isn't found. Making the config folder");
+  mkdirSync("./config");
+  console.log("Made the config folder!");
+}
 
 writeFileSync("./config/reddit-bot-config.json", JSON.stringify({
   clientSecret: program.clientSecret,
@@ -26,6 +30,6 @@ writeFileSync("./config/reddit-bot-config.json", JSON.stringify({
   username: program.username,
   password: program.password,
   userAgent: `open-directory-bot (node ${process.version})`
-}, undefined, 2))
+}, undefined, 2));
 
-console.log("Wrote config!")
+console.log("Wrote config!");
